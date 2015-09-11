@@ -1,0 +1,64 @@
+Developer Documentation
+=======================
+
+Contributions
+-------------
+
+Contributions are more than welcomed!
+
+To get setup do the following;
+
+.. code-block:: bash
+
+    mkvirtualenv --python=/usr/bin/python3 django-teledex
+    git clone https://github.com/alexhayes/django-teledex.git
+    cd django-teledex
+    pip install -r requirements/dev.txt
+
+Note that you don't have to use Python 3 and indeed tox tests for many versions
+of Python, but you may as well develop on it, what reason is there not to for
+such a small application?!
+
+Running Tests
+-------------
+
+Once you've checked out you should be able to run the tests.
+
+.. code-block:: bash
+
+    detox
+
+or, alternatively;
+
+.. code-block:: bash
+
+    ./manage.py test
+
+
+Migrations
+----------
+
+If you need to make modelling changes please run :code:`makemigrations` so that
+the migration is included in your pull request.
+
+.. code-block:: bash
+
+    ./manage.py makemigrations
+
+
+Creating translations
+---------------------
+
+Translations are welcomed! Please fork and then from the root
+
+.. code-block:: bash
+
+    cd django_teledex
+    ./../manage.py makemessages -l [LOCALE-NAME]
+
+Then, edit the translations in :code:`django_teledex/locale`, then;
+
+.. code-block:: bash
+
+    ./../manage.py compilemessages
+

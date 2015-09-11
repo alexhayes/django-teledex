@@ -1,0 +1,139 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-10 19:46-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: choices.py:15 choices.py:29 choices.py:55
+msgid "active"
+msgstr "active"
+
+#: choices.py:16 choices.py:30 choices.py:56
+msgid "inactive"
+msgstr "inactive"
+
+#: choices.py:22
+msgid "postal"
+msgstr "postal"
+
+#: choices.py:23
+msgid "physical"
+msgstr "physical"
+
+#: choices.py:42
+msgid "mobile"
+msgstr "mobile"
+
+#: choices.py:43 choices.py:62
+msgid "work"
+msgstr "work"
+
+#: choices.py:44 choices.py:63
+msgid "home"
+msgstr "home"
+
+#: choices.py:45
+msgid "main"
+msgstr "main"
+
+#: choices.py:46
+msgid "work fax"
+msgstr "work fax"
+
+#: choices.py:47
+msgid "home fax"
+msgstr "home fax"
+
+#: choices.py:48
+msgid "google voice"
+msgstr "google voice"
+
+#: choices.py:49
+msgid "pager"
+msgstr "pager"
+
+#: models.py:86 models.py:164 models.py:210
+msgid "kind"
+msgstr "kind"
+
+#: models.py:86
+msgid "The kind of address"
+msgstr "The kind of address"
+
+#: models.py:87 models.py:165 models.py:211
+msgid "status"
+msgstr "status"
+
+#: models.py:89
+msgid "recipient"
+msgstr "recipient"
+
+#: models.py:89
+msgid "Recipient"
+msgstr "Recipient"
+
+#: models.py:90
+msgid "organisation"
+msgstr "organisation"
+
+#: models.py:90
+msgid "Organisation"
+msgstr "Organisation"
+
+#: models.py:91
+msgid "address"
+msgstr "address"
+
+#: models.py:91
+msgid "Street address lines separated by commas (,)"
+msgstr "Street address lines separated by commas (,)"
+
+#: models.py:92
+msgid "locality"
+msgstr "suburb"
+
+#: models.py:92
+msgid "City or town"
+msgstr "Suburb, city or town"
+
+#: models.py:93
+msgid "region"
+msgstr "state"
+
+#: models.py:93
+msgid "State code, country or canton"
+msgstr "Abbreviated state in upper case - ie. VIC for Victoria."
+
+#: models.py:94
+msgid "postcode"
+msgstr "postcode"
+
+#: models.py:94
+msgid "Postal code, post code ZIP code"
+msgstr "Postcode"
+
+#: models.py:95
+msgid "country"
+msgstr "country"
+
+#: models.py:164
+msgid "The kind of phone number"
+msgstr "The kind of phone number"
+
+#: models.py:210
+msgid "The kind of email"
+msgstr "The kind of email"
