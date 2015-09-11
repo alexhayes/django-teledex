@@ -3,7 +3,7 @@
     teledex.models
     ~~~~~~~~~~~~~~
 
-    Address book modelling.
+    Django models for django-teledex.
 
 """
 from __future__ import absolute_import, print_function, unicode_literals
@@ -53,6 +53,8 @@ class AddressQuerySet(models.QuerySet):
         """
         Filter addresses by a particular kind.
 
+        Accepts any of the
+
         :rtype: AddressQuerySet
         """
         return self.filter(kind=kind)
@@ -80,7 +82,7 @@ class Address(models.Model):
     Defines an Address.
 
     Sigh... if only we had a port of
-    `libaddressinput <https://github.com/googlei18n/libaddressinput>`
+    `libaddressinput <https://github.com/googlei18n/libaddressinput>`_
     in Python... :(
     """
     kind = models.CharField(_('kind'), max_length=16, choices=ADDRESS_KIND_CHOICES, default=ADDRESS_KIND_POSTAL, db_index=True, help_text=_('The kind of address'))
@@ -121,6 +123,11 @@ class Address(models.Model):
             return '(N/A)'
 
     def joined(self):
+        """
+        Join the address into a single line string separated by commas.
+
+        :rtype: str
+        """
         # todo Perhaps needs to be formatted according to the country...
         parts = [self.recipient,
                  self.organisation,

@@ -62,3 +62,12 @@ Then, edit the translations in :code:`django_teledex/locale`, then;
 
     ./../manage.py compilemessages
 
+
+Creating Documentation
+----------------------
+
+.. code-block:: bash
+
+    cd docs
+    make clean html
+

@@ -10,9 +10,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from django_dynamic_fixture import G
 
-from ..models import Address, PhoneNumber, AddressQuerySet, PhoneNumberQuerySet, \
-    Email
-from ..choices import ADDRESS_STATUS_ACTIVE, ADDRESS_STATUS_INACTIVE, \
+from .. import Address, PhoneNumber, Email
+from .. import ADDRESS_STATUS_ACTIVE, ADDRESS_STATUS_INACTIVE, \
     PHONENUMBER_STATUS_ACTIVE, PHONENUMBER_STATUS_INACTIVE
 from .testapp.models import ModelWithAddresses, ModelWithPhoneNumbers, \
     ModelWithEmails

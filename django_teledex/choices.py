@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-    teledex.choices
-    ~~~~~~~~~~~~~~~
+    django_teledex.choices
+    ~~~~~~~~~~~~~~~~~~~~~~
 
-    Define teledex model choices.
+    Define choices that can be used within django-teledex.
 """
 from __future__ import absolute_import, print_function, unicode_literals
 from django.utils.translation import ugettext_lazy as _

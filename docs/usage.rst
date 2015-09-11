@@ -57,6 +57,10 @@ If you want to add an address you can then do the following;
     address.activate()
 
 
+A complete list of QuerySet methods available on ``Address.objects`` is available
+in :py:class:`django_teledex.models.AddressQuerySet`.
+
+
 PhoneNumber
 -----------
 
@@ -86,6 +90,10 @@ The :code:`PhoneNumber` model behaves in pretty much the same way, for example;
 
     # Make an phone number active
     phonenumber.activate()
+
+
+A complete list of QuerySet methods available on ``PhoneNumber.objects`` is available
+in :py:class:`django_teledex.models.PhoneNumberQuerySet`.
 
 
 Validation
@@ -135,21 +143,28 @@ The :code:`Email` model also behaves in pretty much the same way, for example;
     email.activate()
 
 
+A complete list of QuerySet methods available on ``Email.objects`` is available
+in :py:class:`django_teledex.models.EmailQuerySet`.
+
+
+
 Reverse Relations
 -----------------
 
 You can also traverse back from an ``Address``, ``PhoneNumber`` or
 ``Email`` to the owner, in this case the ``Company`` - all thanks to Django's
-`reverse generic relations <https://docs.djangoproject.com/en/1.8/ref/contrib/contenttypes/#reverse-generic-relations>`_.
+`reverse generic relations`_.
 
-``AddressRelation``, ``PhoneNumberRelation``, ``EmailRelation`` are simply
-helper classes that inherit from `GenericRelation <https://docs.djangoproject.com/en/1.8/ref/contrib/contenttypes/#django.contrib.contenttypes.fields.GenericRelation>`_
-that set some defaults.
+:py:class:`django_teledex.fields.AddressRelation`, :py:class:`django_teledex.fields.PhoneNumberRelation`
+and :py:class:`django_teledex.fields.EmailRelation` are simply helper classes
+that inherit from `GenericRelation`_ that set some defaults.
 
 The first, and only required, argument to each of the ``*Relation`` classes is
-the `related_query_name <https://docs.djangoproject.com/en/1.8/ref/contrib/contenttypes/#django.contrib.contenttypes.fields.GenericRelation.related_query_name>`_
-used by the ``GenericRelation`` which ``AddressRelation`` inherits. In
-the ``Company`` model above it's set to ``companies``.
+the `related_query_name`_ used by the GenericRelation_ which
+:py:class:`django_teledex.fields.AddressRelation`,
+:py:class:`django_teledex.fields.PhoneNumberRelation` and
+:py:class:`django_teledex.fields.EmailRelation` inherit from. In the
+``Company`` model above it's set to ``companies``.
 
 Thus;
 
@@ -157,3 +172,8 @@ Thus;
 
     # Reverse relations
     Address.objects.filter(companies__title='Evelyn Hotel')
+
+
+.. _reverse generic relations: https://docs.djangoproject.com/en/1.8/ref/contrib/contenttypes/#reverse-generic-relations
+.. _related_query_name: https://docs.djangoproject.com/en/1.8/ref/contrib/contenttypes/#django.contrib.contenttypes.fields.GenericRelation.related_query_name
+.. _GenericRelation: https://docs.djangoproject.com/en/1.8/ref/contrib/contenttypes/#django.contrib.contenttypes.fields.GenericRelation

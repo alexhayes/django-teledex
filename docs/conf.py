@@ -7,6 +7,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_teledex.tests.testapp.se
 
 this = os.path.dirname(os.path.abspath(__file__))
 
+
 # If your extensions are in another directory, add it here. If the directory
 # is relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
@@ -14,14 +15,16 @@ sys.path.insert(0, os.path.join(this, os.pardir))
 
 from django_teledex import __version__
 
+# Monkey patch to get around https://github.com/sphinx-doc/sphinx/issues/1254
+from django_countries.fields import CountryField
+from phonenumber_field.modelfields import PhoneNumberField
+from django_teledex.models import Address, PhoneNumber
+Address.country = CountryField()
+PhoneNumber.number = PhoneNumberField()
 
 extensions = ['sphinx.ext.autodoc',
-              'sphinx.ext.coverage',
-              #'sphinx.ext.pngmath',
               'sphinx.ext.viewcode',
-              'sphinx.ext.coverage',
               #'sphinx.ext.intersphinx',
-              #'githubsphinx'
               ]
 
 templates_path = []
@@ -47,9 +50,9 @@ man_pages = [
 version = __version__
 release = version
 
-autodoc_default_flags = ['members', 'private-members', 'special-members',
-                         'undoc-members',
-                         'show-inheritance']
+# autodoc_default_flags = ['members', 'private-members', 'special-members',
+#                          'undoc-members',
+#                          'show-inheritance']
 
 def autodoc_skip_member(app, what, name, obj, skip, options):
     exclusions = ('__weakref__',  # special-members
@@ -60,3 +63,5 @@ def autodoc_skip_member(app, what, name, obj, skip, options):
 
 def setup(app):
     app.connect('autodoc-skip-member', autodoc_skip_member)
+
+
