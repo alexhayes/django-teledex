@@ -1,0 +1,28 @@
+language: python
+python: 3.4
+env:
+  global:
+    PYTHONUNBUFFERED=yes
+  matrix:
+    - TOXENV=2.7
+    - TOXENV=3.3
+    - TOXENV=3.4
+    - TOXENV=pypy
+before_install:
+  - |
+    if [[ $TOXENV = pypy ]]; then
+      deactivate
+      sudo apt-add-repository --yes ppa:pypy/ppa
+      sudo apt-get update
+      sudo apt-get install pypy
+      source ~/virtualenv/pypy/bin/activate
+    fi
+    python --version
+    uname -a
+    lsb_release -a
+install:
+  - pip install tox
+script:
+  - tox -v -- -v
+after_success:
+  - .tox/$TRAVIS_PYTHON_VERSION/bin/coveralls
