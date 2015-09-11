@@ -25,7 +25,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.admin',
     'django.contrib.sessions',
-    'django_extensions',
     'django_teledex',
     'django_teledex.tests.testapp',
 )
