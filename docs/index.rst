@@ -3,6 +3,8 @@ django-teledex
 
 Simple storage of addresses, phone numbers and emails in Django_ Models_.
 
+``django-teledex`` supports Python 2.7, 3.3, 3.4 and pypy for Django 1.7 and 1.8.
+
 Contents
 --------
 
