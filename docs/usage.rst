@@ -11,7 +11,7 @@ For the examples below let's assume you have the following model;
     # models.py
 
     from django.db import models
-    from django_teledex import AddressRelation, PhoneNumberRelation, EmailRelation
+    from django_teledex.fields import AddressRelation, PhoneNumberRelation, EmailRelation
 
 
     class Company(models.Model):
@@ -28,13 +28,15 @@ If you want to add an address you can then do the following;
 
 .. code-block:: python
 
-    from django_teledex import Address, ADDRESS_KIND_PHYSICAL
+    from django_teledex.models import Address
+    from django_teledex.choices import AddressKind
+
 
     company = Company.objects.create(title='Evelyn Hotel')
 
     address = Address.objects.create(
         organisation=company.title,
-        kind=ADDRESS_KIND_PHYSICAL,
+        kind=AddressKind.physical,
         owner=company,
         address_line='351 Brunswick St',
         locality='Fitzroy',
@@ -50,7 +52,7 @@ If you want to add an address you can then do the following;
     address.deactivate()
 
     company.addresses.inactive() # all inactive addresses
-    company.addresses.kind(ADDRESS_KIND_PHYSICAL) # get addresses by kind
+    company.addresses.kind(AddressKind.physical) # get addresses by kind
     company.addresses.filter(postcode=3065) # filter works as you'd expect...
 
     # Make an address active
@@ -68,12 +70,13 @@ The :code:`PhoneNumber` model behaves in pretty much the same way, for example;
 
 .. code-block:: python
 
-    from django_teledex import PhoneNumber, PHONENUMBER_KIND_MOBILE
+    from django_teledex.models import PhoneNumber
+    from django_teledex.choices import PhoneNumberKind
 
     company = Company.objects.create(title='Evelyn Hotel')
 
     phonenumber = PhoneNumber.objects.create(
-        kind=PHONENUMBER_KIND_MOBILE,
+        kind=PhoneNumberKind.mobile,
         owner=company,
         number='+61 3 9419 5500'
     )
@@ -85,8 +88,8 @@ The :code:`PhoneNumber` model behaves in pretty much the same way, for example;
     phonenumber.deactivate()
 
     company.phonenumbers.inactive() # all inactive addresses
-    company.phonenumbers.kind(PHONENUMBER_KIND_MOBILE) # by kind
-    company.phonenumbers.filter(kind=PHONE) # filter works as you'd expect...
+    company.phonenumbers.kind(PhoneNumberKind.mobile) # by kind
+    company.phonenumbers.filter(kind=PhoneNumberKind.mobile) # filter works as you'd expect...
 
     # Make an phone number active
     phonenumber.activate()
@@ -119,12 +122,13 @@ The :code:`Email` model also behaves in pretty much the same way, for example;
 
 .. code-block:: python
 
-    from django_teledex import Email, EMAIL_KIND_WORK
+    from django_teledex.models import Email
+    from django_teledex.choices import EmailKind
 
     company = Company.objects.create(title='Evelyn Hotel')
 
     email = Email.objects.create(
-        kind=EMAIL_KIND_WORK,
+        kind=EmailKind.work,
         owner=company,
         email='guys@example.com'
     )
@@ -136,7 +140,7 @@ The :code:`Email` model also behaves in pretty much the same way, for example;
     email.deactivate()
 
     company.emails.inactive() # all inactive addresses
-    company.emails.kind(EMAIL_KIND_WORK) # by kind
+    company.emails.kind(EmailKind.work) # by kind
     company.emails.filter(email__icontains='guys@') # filter works as you'd expect...
 
     # Make an phone number active

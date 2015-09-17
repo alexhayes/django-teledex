@@ -10,9 +10,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from django_dynamic_fixture import G
 
-from .. import Address, PhoneNumber, Email
-from .. import ADDRESS_STATUS_ACTIVE, ADDRESS_STATUS_INACTIVE, \
-    PHONENUMBER_STATUS_ACTIVE, PHONENUMBER_STATUS_INACTIVE
+from ..choices import AddressKind, AddressStatus, PhoneNumberKind, \
+    PhoneNumberStatus, EmailKind, EmailStatus
+from ..models import Address, PhoneNumber, Email
 from .testapp.models import ModelWithAddresses, ModelWithPhoneNumbers, \
     ModelWithEmails
 
@@ -25,11 +25,11 @@ class AddressRelationTestCase(TestCase):
 
         content_type = ContentType.objects.get_for_model(self.obj1)
 
-        self.address1 = G(Address, status=ADDRESS_STATUS_ACTIVE, owner_type=content_type, owner_id=self.obj1.pk)
-        self.address2 = G(Address, status=ADDRESS_STATUS_ACTIVE, owner_type=content_type, owner_id=self.obj1.pk)
-        self.address3 = G(Address, status=ADDRESS_STATUS_INACTIVE, owner_type=content_type, owner_id=self.obj1.pk)
-        self.address4 = G(Address, status=ADDRESS_STATUS_ACTIVE, owner_type=content_type, owner_id=self.obj2.pk)
-        self.address5 = G(Address, status=ADDRESS_STATUS_INACTIVE, owner_type=content_type, owner_id=self.obj2.pk)
+        self.address1 = G(Address, status=AddressStatus.active, owner_type=content_type, owner_id=self.obj1.pk)
+        self.address2 = G(Address, status=AddressStatus.active, owner_type=content_type, owner_id=self.obj1.pk)
+        self.address3 = G(Address, status=AddressStatus.inactive, owner_type=content_type, owner_id=self.obj1.pk)
+        self.address4 = G(Address, status=AddressStatus.active, owner_type=content_type, owner_id=self.obj2.pk)
+        self.address5 = G(Address, status=AddressStatus.inactive, owner_type=content_type, owner_id=self.obj2.pk)
 
     def test_relation(self):
         self.assertEqual(Address.objects.count(), 5)
@@ -41,11 +41,11 @@ class AddressRelationTestCase(TestCase):
         self.assertEqual(qs.count(), 2)
 
     def test_relation_active(self):
-        qs = ModelWithAddresses.objects.filter(addresses__status=ADDRESS_STATUS_ACTIVE)
+        qs = ModelWithAddresses.objects.filter(addresses__status=AddressStatus.active)
         self.assertEqual(qs.count(), 3)
 
     def test_relation_inactive(self):
-        qs = ModelWithAddresses.objects.filter(addresses__status=ADDRESS_STATUS_INACTIVE)
+        qs = ModelWithAddresses.objects.filter(addresses__status=AddressStatus.inactive)
         self.assertEqual(qs.count(), 2)
 
     def test_reverse_relation(self):
@@ -67,11 +67,11 @@ class PhoneNumberRelationTestCase(TestCase):
 
         content_type = ContentType.objects.get_for_model(self.obj1)
 
-        self.phonenumber1 = G(PhoneNumber, status=PHONENUMBER_STATUS_ACTIVE, owner_type=content_type, owner_id=self.obj1.pk)
-        self.phonenumber2 = G(PhoneNumber, status=PHONENUMBER_STATUS_ACTIVE, owner_type=content_type, owner_id=self.obj1.pk)
-        self.phonenumber3 = G(PhoneNumber, status=PHONENUMBER_STATUS_INACTIVE, owner_type=content_type, owner_id=self.obj1.pk)
-        self.phonenumber4 = G(PhoneNumber, status=PHONENUMBER_STATUS_ACTIVE, owner_type=content_type, owner_id=self.obj2.pk)
-        self.phonenumber5 = G(PhoneNumber, status=PHONENUMBER_STATUS_INACTIVE, owner_type=content_type, owner_id=self.obj2.pk)
+        self.phonenumber1 = G(PhoneNumber, status=PhoneNumberStatus.active, owner_type=content_type, owner_id=self.obj1.pk)
+        self.phonenumber2 = G(PhoneNumber, status=PhoneNumberStatus.active, owner_type=content_type, owner_id=self.obj1.pk)
+        self.phonenumber3 = G(PhoneNumber, status=PhoneNumberStatus.inactive, owner_type=content_type, owner_id=self.obj1.pk)
+        self.phonenumber4 = G(PhoneNumber, status=PhoneNumberStatus.active, owner_type=content_type, owner_id=self.obj2.pk)
+        self.phonenumber5 = G(PhoneNumber, status=PhoneNumberStatus.inactive, owner_type=content_type, owner_id=self.obj2.pk)
 
     def test_relation(self):
         self.assertEqual(PhoneNumber.objects.count(), 5)
@@ -83,11 +83,11 @@ class PhoneNumberRelationTestCase(TestCase):
         self.assertEqual(qs.count(), 2)
 
     def test_relation_active(self):
-        qs = ModelWithPhoneNumbers.objects.filter(phonenumbers__status=PHONENUMBER_STATUS_ACTIVE)
+        qs = ModelWithPhoneNumbers.objects.filter(phonenumbers__status=PhoneNumberStatus.active)
         self.assertEqual(qs.count(), 3)
 
     def test_relation_inactive(self):
-        qs = ModelWithPhoneNumbers.objects.filter(phonenumbers__status=PHONENUMBER_STATUS_INACTIVE)
+        qs = ModelWithPhoneNumbers.objects.filter(phonenumbers__status=PhoneNumberStatus.inactive)
         self.assertEqual(qs.count(), 2)
 
     def test_reverse_relation(self):
@@ -103,11 +103,11 @@ class EmailRelationTestCase(TestCase):
 
         content_type = ContentType.objects.get_for_model(self.obj1)
 
-        self.email1 = G(Email, status=PHONENUMBER_STATUS_ACTIVE, owner_type=content_type, owner_id=self.obj1.pk)
-        self.email2 = G(Email, status=PHONENUMBER_STATUS_ACTIVE, owner_type=content_type, owner_id=self.obj1.pk)
-        self.email3 = G(Email, status=PHONENUMBER_STATUS_INACTIVE, owner_type=content_type, owner_id=self.obj1.pk)
-        self.email4 = G(Email, status=PHONENUMBER_STATUS_ACTIVE, owner_type=content_type, owner_id=self.obj2.pk)
-        self.email5 = G(Email, status=PHONENUMBER_STATUS_INACTIVE, owner_type=content_type, owner_id=self.obj2.pk)
+        self.email1 = G(Email, status=PhoneNumberStatus.active, owner_type=content_type, owner_id=self.obj1.pk)
+        self.email2 = G(Email, status=PhoneNumberStatus.active, owner_type=content_type, owner_id=self.obj1.pk)
+        self.email3 = G(Email, status=PhoneNumberStatus.inactive, owner_type=content_type, owner_id=self.obj1.pk)
+        self.email4 = G(Email, status=PhoneNumberStatus.active, owner_type=content_type, owner_id=self.obj2.pk)
+        self.email5 = G(Email, status=PhoneNumberStatus.inactive, owner_type=content_type, owner_id=self.obj2.pk)
 
     def test_relation(self):
         self.assertEqual(Email.objects.count(), 5)
@@ -119,11 +119,11 @@ class EmailRelationTestCase(TestCase):
         self.assertEqual(qs.count(), 2)
 
     def test_relation_active(self):
-        qs = ModelWithEmails.objects.filter(emails__status=PHONENUMBER_STATUS_ACTIVE)
+        qs = ModelWithEmails.objects.filter(emails__status=PhoneNumberStatus.active)
         self.assertEqual(qs.count(), 3)
 
     def test_relation_inactive(self):
-        qs = ModelWithEmails.objects.filter(emails__status=PHONENUMBER_STATUS_INACTIVE)
+        qs = ModelWithEmails.objects.filter(emails__status=PhoneNumberStatus.inactive)
         self.assertEqual(qs.count(), 2)
 
     def test_reverse_relation(self):

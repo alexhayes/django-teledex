@@ -19,13 +19,8 @@ from django.conf import settings
 # todo Make reversion support optional detecting import failure and faking the decorator
 import reversion
 
-from .choices import ADDRESS_KIND_POSTAL, ADDRESS_KIND_CHOICES, \
-    ADDRESS_STATUS_ACTIVE, ADDRESS_STATUS_INACTIVE, ADDRESS_STATUS_CHOICES, \
-    PHONENUMBER_KIND_CHOICES, PHONENUMBER_STATUS_CHOICES, \
-    PHONENUMBER_STATUS_ACTIVE, PHONENUMBER_KIND_WORK, \
-    PHONENUMBER_STATUS_INACTIVE, ADDRESS_KIND_PHYSICAL, EMAIL_KIND_CHOICES, \
-    EMAIL_KIND_WORK, EMAIL_STATUS_ACTIVE, EMAIL_STATUS_CHOICES, \
-    EMAIL_STATUS_INACTIVE
+from .choices import AddressKind, AddressStatus, PhoneNumberKind, \
+    PhoneNumberStatus, EmailKind, EmailStatus
 
 
 class AddressQuerySet(models.QuerySet):
@@ -39,7 +34,7 @@ class AddressQuerySet(models.QuerySet):
 
         :rtype: AddressQuerySet
         """
-        return self.filter(status=ADDRESS_STATUS_ACTIVE)
+        return self.filter(status=AddressStatus.active)
 
     def inactive(self):
         """
@@ -47,7 +42,7 @@ class AddressQuerySet(models.QuerySet):
 
         :rtype: AddressQuerySet
         """
-        return self.filter(status=ADDRESS_STATUS_INACTIVE)
+        return self.filter(status=AddressStatus.inactive)
 
     def kind(self, kind):
         """
@@ -65,7 +60,7 @@ class AddressQuerySet(models.QuerySet):
 
         :rtype: AddressQuerySet
         """
-        return self.kind(ADDRESS_KIND_POSTAL)
+        return self.kind(AddressKind.postal)
 
     def physical(self):
         """
@@ -73,7 +68,7 @@ class AddressQuerySet(models.QuerySet):
 
         :rtype: AddressQuerySet
         """
-        return self.kind(ADDRESS_KIND_PHYSICAL)
+        return self.kind(AddressKind.physical)
 
 
 @reversion.register
@@ -85,8 +80,8 @@ class Address(models.Model):
     `libaddressinput <https://github.com/googlei18n/libaddressinput>`_
     in Python... :(
     """
-    kind = models.CharField(_('kind'), max_length=16, choices=ADDRESS_KIND_CHOICES, default=ADDRESS_KIND_POSTAL, db_index=True, help_text=_('The kind of address'))
-    status = models.CharField(_('status'), max_length=16, choices=ADDRESS_STATUS_CHOICES, db_index=True, default=ADDRESS_STATUS_ACTIVE, help_text="Defines the current status of the address")
+    kind = models.CharField(_('kind'), max_length=16, choices=AddressKind.choices, default=AddressKind.postal, db_index=True, help_text=_('The kind of address'))
+    status = models.CharField(_('status'), max_length=16, choices=AddressStatus.choices, db_index=True, default=AddressStatus.active, help_text="Defines the current status of the address")
     # Actual address fields
     recipient = models.CharField(_('recipient'), max_length=255, null=True, blank=True, help_text=_('Recipient'))
     organisation = models.CharField(_('organisation'), max_length=255, null=True, blank=True, help_text=_('Organisation'))
@@ -151,13 +146,13 @@ class PhoneNumberQuerySet(models.QuerySet):
         """
         Filter for active Phone Numbers
         """
-        return self.filter(status=PHONENUMBER_STATUS_ACTIVE)
+        return self.filter(status=PhoneNumberStatus.active)
 
     def inactive(self):
         """
         Filter for inactive Phone Numbers
         """
-        return self.filter(status=PHONENUMBER_STATUS_INACTIVE)
+        return self.filter(status=PhoneNumberStatus.inactive)
 
     def kind(self, kind):
         return self.filter(kind=kind)
@@ -168,8 +163,8 @@ class PhoneNumber(models.Model):
     """
     Defines a Phone Number.
     """
-    kind = models.CharField(_('kind'), max_length=16, choices=PHONENUMBER_KIND_CHOICES, default=PHONENUMBER_KIND_WORK, db_index=True, help_text=_('The kind of phone number'))
-    status = models.CharField(_('status'), max_length=16, choices=PHONENUMBER_STATUS_CHOICES, default=PHONENUMBER_STATUS_ACTIVE, db_index=True, help_text="Defines the current status of the phone number")
+    kind = models.CharField(_('kind'), max_length=16, choices=PhoneNumberKind.choices, default=PhoneNumberKind.work, db_index=True, help_text=_('The kind of phone number'))
+    status = models.CharField(_('status'), max_length=16, choices=PhoneNumberStatus.choices, default=PhoneNumberStatus.active, db_index=True, help_text="Defines the current status of the phone number")
     # Actual Phone Number
     number = PhoneNumberField(max_length=40, db_index=True)
     # Defines something that this address belongs to
@@ -197,13 +192,13 @@ class EmailQuerySet(models.QuerySet):
         """
         Filter for active Phone Numbers
         """
-        return self.filter(status=EMAIL_STATUS_ACTIVE)
+        return self.filter(status=EmailStatus.active)
 
     def inactive(self):
         """
         Filter for inactive Phone Numbers
         """
-        return self.filter(status=EMAIL_STATUS_INACTIVE)
+        return self.filter(status=EmailStatus.inactive)
 
     def kind(self, kind):
         return self.filter(kind=kind)
@@ -214,8 +209,8 @@ class Email(models.Model):
     """
     Defines a Phone Number.
     """
-    kind = models.CharField(_('kind'), max_length=16, choices=EMAIL_KIND_CHOICES, default=EMAIL_KIND_WORK, db_index=True, help_text=_('The kind of email'))
-    status = models.CharField(_('status'), max_length=16, choices=EMAIL_STATUS_CHOICES, default=EMAIL_STATUS_ACTIVE, db_index=True, help_text="Defines the current status of the email")
+    kind = models.CharField(_('kind'), max_length=16, choices=EmailKind.choices, default=EmailKind.work, db_index=True, help_text=_('The kind of email'))
+    status = models.CharField(_('status'), max_length=16, choices=EmailStatus.choices, default=EmailStatus.active, db_index=True, help_text="Defines the current status of the email")
     # Actual Phone Number
     email = models.EmailField(max_length=191, db_index=True)
     # Defines something that this address belongs to

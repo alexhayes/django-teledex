@@ -7,58 +7,58 @@
 """
 from __future__ import absolute_import, print_function, unicode_literals
 from django.utils.translation import ugettext_lazy as _
+from djchoices import DjangoChoices, ChoiceItem
 
 
-ADDRESS_STATUS_ACTIVE = 'active'
-ADDRESS_STATUS_INACTIVE = 'inactive'
-ADDRESS_STATUS_CHOICES = (
-    (ADDRESS_STATUS_ACTIVE, _('active')),
-    (ADDRESS_STATUS_INACTIVE, _('inactive')),
-)
+class AddressStatus(DjangoChoices):
+    """
+    Defines statues used for :py:attr:`django_teledex.models.Address.status`
+    """
+    active = ChoiceItem()
+    inactive = ChoiceItem()
 
-ADDRESS_KIND_POSTAL = 'postal'
-ADDRESS_KIND_PHYSICAL = 'physical'
-ADDRESS_KIND_CHOICES = (
-    (ADDRESS_KIND_POSTAL, _('postal')),
-    (ADDRESS_KIND_PHYSICAL, _('physical')),
-)
 
-PHONENUMBER_STATUS_ACTIVE = 'active'
-PHONENUMBER_STATUS_INACTIVE = 'inactive'
-PHONENUMBER_STATUS_CHOICES = (
-    (PHONENUMBER_STATUS_ACTIVE, _('active')),
-    (PHONENUMBER_STATUS_INACTIVE, _('inactive')),
-)
+class AddressKind(DjangoChoices):
+    """
+    Defines statues used for :py:attr:`django_teledex.models.Address.kind`
+    """
+    postal = ChoiceItem()
+    physical = ChoiceItem()
 
-PHONENUMBER_KIND_MOBILE = 'mobile'
-PHONENUMBER_KIND_WORK = 'work'
-PHONENUMBER_KIND_HOME = 'home'
-PHONENUMBER_KIND_MAIN = 'main'
-PHONENUMBER_KIND_WORKFAX = 'workfax'
-PHONENUMBER_KIND_HOMEFAX = 'homefax'
-PHONENUMBER_KIND_GOOGLEVOICE = 'googlevoice'
-PHONENUMBER_KIND_PAGER = 'pager'
-PHONENUMBER_KIND_CHOICES = (
-    (PHONENUMBER_KIND_MOBILE, _('mobile')),
-    (PHONENUMBER_KIND_WORK, _('work')),
-    (PHONENUMBER_KIND_HOME, _('home')),
-    (PHONENUMBER_KIND_MAIN, _('main')),
-    (PHONENUMBER_KIND_WORKFAX, _('work fax')),
-    (PHONENUMBER_KIND_HOMEFAX, _('home fax')),
-    (PHONENUMBER_KIND_GOOGLEVOICE, _('google voice')),
-    (PHONENUMBER_KIND_PAGER, _('pager')),
-)
 
-EMAIL_STATUS_ACTIVE = 'active'
-EMAIL_STATUS_INACTIVE = 'inactive'
-EMAIL_STATUS_CHOICES = (
-    (EMAIL_STATUS_ACTIVE, _('active')),
-    (EMAIL_STATUS_INACTIVE, _('inactive')),
-)
+class PhoneNumberStatus(DjangoChoices):
+    """
+    Defines statues used for :py:attr:`django_teledex.models.PhoneNumber.status`
+    """
+    active = ChoiceItem()
+    inactive = ChoiceItem()
 
-EMAIL_KIND_WORK = 'work'
-EMAIL_KIND_HOME = 'home'
-EMAIL_KIND_CHOICES = (
-    (EMAIL_KIND_WORK, _('work')),
-    (EMAIL_KIND_HOME, _('home')),
-)
+
+class PhoneNumberKind(DjangoChoices):
+    """
+    Defines statues used for :py:attr:`django_teledex.models.PhoneNumber.kind`
+    """
+    mobile = ChoiceItem()
+    work = ChoiceItem()
+    home = ChoiceItem()
+    main = ChoiceItem()
+    workfax = ChoiceItem('workfax', 'work fax')
+    homefax = ChoiceItem('homefax', 'home fax')
+    googlevoice = ChoiceItem('googlevoice', 'google voice')
+    pager = ChoiceItem()
+
+
+class EmailStatus(DjangoChoices):
+    """
+    Defines statues used for :py:attr:`django_teledex.models.Email.status`
+    """
+    active = ChoiceItem()
+    inactive = ChoiceItem()
+
+
+class EmailKind(DjangoChoices):
+    """
+    Defines statues used for :py:attr:`django_teledex.models.Email.kind`
+    """
+    work = ChoiceItem()
+    home = ChoiceItem()

@@ -11,17 +11,16 @@ from django_dynamic_fixture import G, N
 
 from ..models import Address, PhoneNumber, AddressQuerySet, PhoneNumberQuerySet, \
     Email
-from ..choices import ADDRESS_STATUS_ACTIVE, ADDRESS_STATUS_INACTIVE, \
-    PHONENUMBER_STATUS_ACTIVE, PHONENUMBER_STATUS_INACTIVE, EMAIL_STATUS_ACTIVE, \
-    EMAIL_STATUS_INACTIVE
+from ..choices import AddressKind, AddressStatus, PhoneNumberKind, \
+    PhoneNumberStatus, EmailKind, EmailStatus
 
 
 class AddressQuerySetTestCase(TestCase):
 
     def setUp(self):
-        self.address1 = G(Address, status=ADDRESS_STATUS_ACTIVE)
-        self.address2 = G(Address, status=ADDRESS_STATUS_ACTIVE)
-        self.address3 = G(Address, status=ADDRESS_STATUS_INACTIVE)
+        self.address1 = G(Address, status=AddressStatus.active)
+        self.address2 = G(Address, status=AddressStatus.active)
+        self.address3 = G(Address, status=AddressStatus.inactive)
 
     def test_active(self):
         self.assertEqual(Address.objects.active().count(), 2)
@@ -74,9 +73,9 @@ class AddressQuerySetTestCase(TestCase):
 class PhoneNumberQuerySetTestCase(TestCase):
 
     def setUp(self):
-        self.phonenumber1 = G(PhoneNumber, status=PHONENUMBER_STATUS_ACTIVE)
-        self.phonenumber2 = G(PhoneNumber, status=PHONENUMBER_STATUS_ACTIVE)
-        self.phonenumber3 = G(PhoneNumber, status=PHONENUMBER_STATUS_INACTIVE)
+        self.phonenumber1 = G(PhoneNumber, status=PhoneNumberStatus.active)
+        self.phonenumber2 = G(PhoneNumber, status=PhoneNumberStatus.active)
+        self.phonenumber3 = G(PhoneNumber, status=PhoneNumberStatus.inactive)
 
     def test_active(self):
         self.assertEqual(PhoneNumber.objects.active().count(), 2)
@@ -91,9 +90,9 @@ class PhoneNumberQuerySetTestCase(TestCase):
 class EmailQuerySetTestCase(TestCase):
 
     def setUp(self):
-        self.email1 = G(Email, status=EMAIL_STATUS_ACTIVE)
-        self.email2 = G(Email, status=EMAIL_STATUS_ACTIVE)
-        self.email3 = G(Email, status=EMAIL_STATUS_INACTIVE)
+        self.email1 = G(Email, status=EmailStatus.active)
+        self.email2 = G(Email, status=EmailStatus.active)
+        self.email3 = G(Email, status=EmailStatus.inactive)
 
     def test_active(self):
         self.assertEqual(Email.objects.active().count(), 2)
