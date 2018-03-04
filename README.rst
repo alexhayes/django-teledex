@@ -12,9 +12,9 @@ django-teledex
 .. _Coverage Status: https://coveralls.io/r/alexhayes/django-teledex?branch=master
 .. |Code Status| image:: https://landscape.io/github/alexhayes/django-teledex/master/landscape.png
 .. _Code Status: https://landscape.io/github/alexhayes/django-teledex/
-.. |PyPi version| image:: https://pypip.in/v/django-teledex/badge.png
+.. |PyPi version| image:: https://img.shields.io/pypi/v/django-teledex.svg
 .. _PyPi version: https://pypi.python.org/pypi/django-teledex
-.. |PyPi downloads| image:: https://pypip.in/d/django-teledex/badge.png
+.. |PyPi downloads| image:: https://img.shields.io/pypi/dm/django-teledex.svg
 .. _PyPi downloads: https://pypi.python.org/pypi/django-teledex
 
 ``django-teledex`` supports Python 2.7, 3.3, 3.4 and pypy for Django 1.7 and 1.8.
